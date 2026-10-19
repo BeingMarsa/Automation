@@ -1,0 +1,42 @@
+# ====================================================================
+# Render Blueprint Configuration (render.yaml)
+# https://render.com/docs/blueprint-spec
+# ====================================================================
+
+services:
+  # Option A: Web Service (Compatible with Render Free Tier)
+  # Runs the lightweight health-check server on $PORT and the automation in the background
+  - type: web
+    name: youtube-to-instagram-automation
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py server
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.11
+      - key: YOUTUBE_CHANNEL_URL
+        sync: false  # Fill in via Render Dashboard
+      - key: INSTAGRAM_USERNAME
+        sync: false  # Fill in via Render Dashboard
+      - key: INSTAGRAM_PASSWORD
+        sync: false  # Optional if INSTAGRAM_SESSION_BASE64 is provided
+      - key: INSTAGRAM_SESSION_BASE64
+        sync: false  # Recommended: Generated via `python main.py export-session`
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false  # Optional: Telegram Bot token from @BotFather
+      - key: TELEGRAM_CHAT_ID
+        sync: false  # Optional: Telegram Chat ID from @userinfobot
+      - key: SHORTS_ONLY
+        value: "true"
+      - key: MAX_VIDEOS_PER_RUN
+        value: "2"
+      - key: DELAY_BETWEEN_POSTS_SECONDS
+        value: "90"
+      - key: POST_ORDER
+        value: "oldest_first"
+      - key: CHECK_INTERVAL_MINUTES
+        value: "60"
+      - key: INITIAL_SYNC_ONLY_NEW
+        value: "false"

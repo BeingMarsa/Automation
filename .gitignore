@@ -1,0 +1,24 @@
+# Python virtual environment
+.venv/
+venv/
+ENV/
+
+# Environment and sensitive credentials
+.env
+*.session.json
+instagram_session.json
+
+# Temporary downloaded videos and cache
+temp_videos/
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Database files
+data/*.db
+data/*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
